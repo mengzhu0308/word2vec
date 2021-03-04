@@ -102,7 +102,7 @@ if __name__ == '__main__':
     x_in = Input(shape=(1, ), dtype='int32')
     y_true = Input(shape=(window_size * 2, ), dtype='int32')
     y_out = skip_gram(x_in, vocub_size, word_dim, window_size)
-    y_out = Skip_Gram_Loss(output_axis=-1)([y_true, *y_out])
+    y_out = Skip_Gram_Loss(output_axis=[i + 1 for i in range(window_size * 2)])([y_true, *y_out])
     model = Model([y_true, x_in], y_out)
     optimizer = Adam(learning_rate=init_lr)
     model.compile(optimizer)
