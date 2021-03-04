@@ -130,11 +130,12 @@ if __name__ == '__main__':
 
     # 互信息
     def mutual_information(word):
-        outs = model.predict_on_batch(np.array([token2id[word]]))
+        outs = model.predict_on_batch([np.zeros((1, window_size * 2), dtype='int32'),
+                                       np.zeros((1, 1), dtype='int32') + token2id[word]])
         pred = sum(outs) / len(outs)
         pred = pred[0]
 
-        mi = {id2token[i]: pred[i] - dfs[id2token[i - 2]] / total_df for i, j in enumerate(id2token) if i > 1}
+        mi = {id2token[i]: pred[i] - dfs[id2token[i]] / total_df for i, j in enumerate(id2token) if i > 1}
         return Counter(mi).most_common(n=6)
 
     pprint(mutual_information('people'))
