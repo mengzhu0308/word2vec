@@ -21,12 +21,12 @@ from word2vec import cbow
 
 if __name__ == '__main__':
     word_dim = 128
-    window_size = 7
+    window_size = 3
     min_df = 10
     subsample_t = 1e-5
-    batch_size = 2000
-    epochs = 600
-    init_lr = 0.2
+    batch_size = 100
+    epochs = 100
+    init_lr = 0.01
 
     with open('sentences.pkl', 'rb') as f:
         sentences = pickle.load(f)
