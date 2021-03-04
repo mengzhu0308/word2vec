@@ -135,7 +135,7 @@ if __name__ == '__main__':
         pred = sum(outs) / len(outs)
         pred = pred[0]
 
-        mi = {id2token[i]: pred[i] - dfs[id2token[i]] / total_df for i, j in enumerate(id2token) if i > 1}
+        mi = {id2token[i]: np.log2(pred[i]) - np.log2(dfs[id2token[i]] / total_df) for i, j in enumerate(id2token) if i > 1}
         return Counter(mi).most_common(n=6)
 
     pprint(mutual_information('people'))
