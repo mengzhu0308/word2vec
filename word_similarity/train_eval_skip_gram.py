@@ -127,14 +127,16 @@ if __name__ == '__main__':
 
     model.load_weights('skip_gram_best_wts.weights', by_name=True)
 
-    # 互信息
-    def mutual_information(word):
+     # 互信息
+    def mutual_information(word, index=2):
         outs = model.predict_on_batch([np.zeros((1, window_size * 2), dtype='int32'),
                                        np.zeros((1, 1), dtype='int32') + token2id[word]])
-        pred = sum(outs) / len(outs)
-        pred = pred[0]
+        pred = outs[index][0]
 
         mi = {id2token[i]: np.log2(pred[i]) - np.log2(dfs[id2token[i]] / total_df) for i, j in enumerate(id2token) if i > 1}
         return Counter(mi).most_common(n=6)
 
-    pprint(mutual_information('people'))
+    pprint(mutual_information('movie', index=2))
+    pprint(mutual_information('movie', index=4))
+    pprint(mutual_information('movie', index=1))
+    pprint(mutual_information('movie', index=5))
