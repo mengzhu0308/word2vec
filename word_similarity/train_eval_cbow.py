@@ -126,4 +126,4 @@ if __name__ == '__main__':
         sort = np.argsort(sims)[::-1]
         return [(id2token[i], sims[i]) for i in sort[:6]]
 
-    pprint(cos_similarity('people'))
+    pprint(cos_similarity('movie'))
