@@ -126,7 +126,6 @@ if __name__ == '__main__':
                         initial_epoch=0)
 
     model.load_weights('skip_gram_best_wts.weights', by_name=True)
-    embedding_wts = model.get_weights()[0]
 
     # 互信息
     def mutual_information(word):
